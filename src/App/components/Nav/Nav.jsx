@@ -19,7 +19,7 @@ class Nav extends Component {
         id="main-nav-bar"
       >
         <Navbar.Header>
-          <Brand text={'The Labz'} />
+          <Brand text={'The Labz'} onSelect={this.props.onSelect} />
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse id="links">

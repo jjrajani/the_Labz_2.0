@@ -24,14 +24,14 @@ class Workspace extends Component {
     id === 'new' ? this.initNew() : this.initExisting(id);
   }
   initExisting(id) {
-    console.log('get existing workspace with id', id);
+    // console.log('get existing workspace with id', id);
     this.setState({ project: new Project() });
   }
   initNew() {
     this.setState({ project: new Project() });
   }
   render() {
-    console.log(this.state.project);
+    // console.log(this.state.project);
     return <div>Workspace</div>;
   }
 }

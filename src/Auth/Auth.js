@@ -25,7 +25,6 @@ class Auth {
   }
 
   login() {
-    console.log('login');
     this.auth0.authorize();
   }
 
@@ -50,7 +49,7 @@ class Auth {
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log('is authorized');
+        // console.log('is authorized');
         this.setSesstion(authResult);
         history.replace('/profile');
       } else if (err) {

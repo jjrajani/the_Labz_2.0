@@ -22,6 +22,10 @@ class AuthLinks extends Component {
   toggle = () => {
     this.setState({ open: !this.state.open, active: !this.state.active });
   };
+  onSelect = route => {
+    this.toggle();
+    this.props.onSelect(route);
+  };
   render() {
     const { profile, onSelect, auth } = this.props;
     const { isAuthenticated, userProfile } = auth;
@@ -44,7 +48,10 @@ class AuthLinks extends Component {
           title={''}
           id={`profile-dropdown`}
         >
-          <li role="presentation" onClick={onSelect.bind(this, '/profile')}>
+          <li
+            role="presentation"
+            onClick={this.onSelect.bind(this, '/profile')}
+          >
             <a className="link">Profile</a>
           </li>
           <li role="presentation" onClick={auth.logout}>
