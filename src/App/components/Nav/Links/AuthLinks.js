@@ -1,12 +1,12 @@
 // Globals
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // Components
 import { Nav, NavDropdown } from 'react-bootstrap';
 // HOC
-import withProfile from '../../../hoc/withProfile';
+import WithProfile from '../../../hoc/WithProfile';
 
-class AuthLinks extends withProfile {
+class AuthLinks extends WithProfile {
   constructor(props) {
     super(props);
     /*
@@ -15,8 +15,7 @@ class AuthLinks extends withProfile {
       profile-dropdown-wrapper class
     */
     this.state = {
-      // ...this.state to carry withProfile state
-      ...this.state,
+      profile: {},
       open: false,
       active: false
     };

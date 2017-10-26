@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Details = ({ profile, toggleVisibility }) => {
-  console.log('details', profile);
   return (
     <div className="details">
       <h2>

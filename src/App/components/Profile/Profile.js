@@ -3,20 +3,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // Components
 import Bio from './Bio/Bio';
-// Services
-import profileStore from './profileStore';
+// HOC
+import WithProfile from '../../hoc/WithProfile';
 
-class Profile extends Component {
+class Profile extends WithProfile {
   constructor(props) {
     super(props);
     this.state = {
       profile: {}
     };
   }
-  componentWillMount = async () => {
-    const profile = await profileStore.fetchProfile(this.props.auth);
-    this.setState({ profile });
-  };
   render() {
     return (
       <div id="profile" className="row">

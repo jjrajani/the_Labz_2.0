@@ -6,12 +6,10 @@ export const fetchUsers = async () => {
 };
 
 export const createUser = async user => {
-  console.log('client service', user);
   const res = await axios.post('/api/users', {
     authId: user.sub,
     name: user.name,
     avatar: user.picture,
-    // email: { type: String, default: '' },
     nickname: user.nickname
   });
   return res.data;
@@ -24,7 +22,6 @@ export const fetchUserByAuthId = async authId => {
 };
 
 export const updateUser = async user => {
-  console.log('update user', user);
   const res = await axios.put(`/api/user/${user._id}`, user);
-  console.log('res', res.data);
+  return res.data;
 };
