@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // Utils
-import withReactRouterBootstrapNav from '../../hoc/ReactRouterBootstrapNav';
+import withReactRouterBootstrapNav from '../../hoc/withReactRouterBootstrapNav';
 // Components
 import { Navbar } from 'react-bootstrap';
 import Brand from './Brand/Brand';
@@ -19,7 +19,7 @@ class Nav extends Component {
         id="main-nav-bar"
       >
         <Navbar.Header>
-          <Brand text={'The Labz'} onSelect={this.props.onSelect} />
+          <Brand text={'The Labz'} onSelect={this.props.closeNav} />
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse id="links">
@@ -37,6 +37,7 @@ Nav.PropTypes = {
   /* withReactRouterBootstrapNav Props (also carries withRouter props) */
   onSelect: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
-  isExpanded: PropTypes.bool.isRequired
+  isExpanded: PropTypes.bool.isRequired,
+  closeNav: PropTypes.func.isRequired
 };
 export default withReactRouterBootstrapNav(Nav);

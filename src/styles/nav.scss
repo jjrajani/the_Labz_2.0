@@ -7,9 +7,13 @@
   padding-left: 2px !important;
   padding-right: 5px !important;
 }
+.profile-dropdown-wrapper {
+  display: flex;
+  align-items: center;
+}
 .profile-dropdown-img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
@@ -20,7 +24,8 @@
 }
 .dropdown-menu {
   text-align: center;
-  background-color: lighten(#e7e7e7, 4%) !important;
+  background-color: lighten(#e7e7e7, 9%) !important;
+  border: solid 1px #ccc !important;
   > li > a {
     padding: 5px 15px !important;
   }
@@ -39,10 +44,6 @@
 }
 
 @media screen and (max-width: 767px) {
-  #profile-dropdown.dropdown-toggle {
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-  }
   .active.dropdown.open {
     margin-bottom: 0px;
   }

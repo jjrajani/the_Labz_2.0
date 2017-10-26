@@ -28,16 +28,16 @@ class AuthLinks extends Component {
   };
   render() {
     const { profile, onSelect, auth } = this.props;
-    const { isAuthenticated, userProfile } = auth;
-    return isAuthenticated() && userProfile ? (
+    const { isAuthenticated, authProfile } = auth;
+    return isAuthenticated() && authProfile ? (
       <Nav
         pullRight
         className={`profile-dropdown-wrapper ${this.state.open ? 'open' : ''}`}
       >
         <img
           className={`profile-dropdown-img`}
-          src={profile.picture}
-          alt={`${userProfile.username}'s profile'`}
+          src={profile.avatar}
+          alt={`${profile.nickname}'s avatar`}
           onClick={onSelect.bind(this, '/profile')}
         />
         <NavDropdown

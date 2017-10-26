@@ -48,6 +48,7 @@ export default function withReactRouterBootstrapNav(ComposedComponent) {
           onSelect={this.onSelect}
           onToggle={this.onToggle}
           isExpanded={this.state.expanded}
+          closeNav={this.closeNav}
         />
       );
     }

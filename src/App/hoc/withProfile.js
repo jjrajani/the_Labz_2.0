@@ -3,11 +3,14 @@ import React, { Component } from 'react';
 
 export default function withProfile(ComposedComponent) {
   class Profile extends Component {
+    constructor(props) {
+      super(props);
+      this.state = { profile: {} };
+    }
     componentWillMount() {
-      this.setState({ profile: {} });
       if (this.props.auth.isAuthenticated()) {
         const { userProfile, getProfile } = this.props.auth;
-        if (!userProfile) {
+        if (!userProfile || Object.keys(userProfile).length === 0) {
           getProfile((err, profile) => {
             this.setState({ profile });
           });
@@ -16,22 +19,6 @@ export default function withProfile(ComposedComponent) {
         }
       }
     }
-    componentWillUpdate = (nextProps, nextState) => {
-      if (
-        nextProps.auth.isAuthenticated() &&
-        !nextProps.auth.userProfile &&
-        Object.keys(this.state.profile).length === 0
-      ) {
-        const { userProfile, getProfile } = this.props.auth;
-        if (!userProfile) {
-          getProfile((err, profile) => {
-            this.setState({ profile });
-          });
-        } else {
-          this.setState({ profile: userProfile });
-        }
-      }
-    };
     render() {
       return <ComposedComponent profile={this.state.profile} {...this.props} />;
     }

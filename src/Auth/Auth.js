@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0-variables';
 import history from '../App/history';
+import { createUser, fetchUserByAuthId } from '../api/users';
 // import axios from 'axios';
 
 class Auth {
@@ -13,6 +14,7 @@ class Auth {
     scope: 'openid profile'
   });
 
+  authProfile;
   userProfile;
 
   constructor() {
@@ -38,11 +40,14 @@ class Auth {
 
   getProfile(cb) {
     let accessToken = this.getAccessToken();
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
+    this.auth0.client.userInfo(accessToken, async (err, profile) => {
+      let dbUser = {};
       if (profile) {
-        this.userProfile = profile;
+        this.authProfile = profile;
+        this.userProfile = dbUser;
+        dbUser = await fetchUserByAuthId(profile.sub);
       }
-      cb(err, profile);
+      cb(err, dbUser);
     });
   }
 
@@ -51,6 +56,7 @@ class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         // console.log('is authorized');
         this.setSesstion(authResult);
+        createUser(authResult.idTokenPayload);
         history.replace('/profile');
       } else if (err) {
         console.log('handle authentication error', err);
@@ -76,6 +82,8 @@ class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    this.authProfile = null;
+    this.userProfile = null;
     // navigate to home
     history.replace('/');
   }

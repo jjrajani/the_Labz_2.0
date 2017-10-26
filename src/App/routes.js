@@ -24,7 +24,11 @@ export const Routes = ({ auth }) => {
               return <Login auth={auth} />;
             }}
           />
-          <Route exact path="/artists" component={Artists} />
+          <Route
+            exact
+            path="/artists"
+            render={props => <Artists auth={auth} />}
+          />
         </div>
       </div>
     </Router>
