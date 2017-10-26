@@ -44,8 +44,8 @@ class Auth {
       let dbUser = {};
       if (profile) {
         this.authProfile = profile;
-        this.userProfile = dbUser;
         dbUser = await fetchUserByAuthId(profile.sub);
+        this.userProfile = dbUser;
       }
       cb(err, dbUser);
     });

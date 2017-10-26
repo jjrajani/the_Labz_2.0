@@ -1,12 +1,12 @@
 // Globals
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// Utils
-import withProfile from '../../../hoc/withProfile';
 // Components
 import { Nav, NavDropdown } from 'react-bootstrap';
+// HOC
+import withProfile from '../../../hoc/withProfile';
 
-class AuthLinks extends Component {
+class AuthLinks extends withProfile {
   constructor(props) {
     super(props);
     /*
@@ -15,6 +15,8 @@ class AuthLinks extends Component {
       profile-dropdown-wrapper class
     */
     this.state = {
+      // ...this.state to carry withProfile state
+      ...this.state,
       open: false,
       active: false
     };
@@ -27,7 +29,8 @@ class AuthLinks extends Component {
     this.props.onSelect(route);
   };
   render() {
-    const { profile, onSelect, auth } = this.props;
+    const { onSelect, auth } = this.props;
+    const { profile } = this.state;
     const { isAuthenticated, authProfile } = auth;
     return isAuthenticated() && authProfile ? (
       <Nav
@@ -72,8 +75,6 @@ class AuthLinks extends Component {
 AuthLinks.PropTypes = {
   /* Component Props */
   onSelect: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  /* withProfile Props */
-  profile: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
-export default withProfile(AuthLinks);
+export default AuthLinks;

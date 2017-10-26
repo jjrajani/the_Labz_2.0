@@ -35,15 +35,20 @@ export default class BioEditForm extends Component {
         </fieldset>
         <fieldset>
           <label>Description</label>
-          <input
-            type="text"
+          <textarea
             name="description"
             value={description}
             onChange={this.props.handleChange.bind(this)}
           />
         </fieldset>
-        <button type="submit">Save</button>
-        <button onClick={this.props.cancelChanges}>Discard</button>
+        <div className="buttons">
+          <button className="btn btn-danger" onClick={this.props.cancelChanges}>
+            Discard
+          </button>
+          <button className="btn btn-primary" type="submit">
+            Save
+          </button>
+        </div>
       </form>
     );
   }

@@ -12,8 +12,10 @@ import EditForm from './EditForm';
 import Details from './Details';
 
 class Bio extends Component {
-  componentWillMount() {
-    this.props.setFormValues(this.props.profile);
+  componentWillReceiveProps(nextProps) {
+    if (this.props.form._id !== nextProps.profile._id) {
+      this.props.setFormValues(nextProps.profile);
+    }
   }
   handleSubmit = e => {
     e.preventDefault();
@@ -26,19 +28,10 @@ class Bio extends Component {
     this.props.hideVisibility();
   };
   render() {
-    const { profile, visible, toggleVisibility } = this.props;
+    const { profile, visible, toggleVisibility, form } = this.props;
     return (
-      <div className="col-sm-12 col-md-4 bio">
-        <img
-          style={{ width: '125px', height: '125px' }}
-          src={profile.avatar}
-          alt={'profile avatar'}
-        />
-        <i
-          style={{ color: 'red', cursor: 'pointer' }}
-          className="fa fa-pencil"
-          onClick={toggleVisibility}
-        />
+      <div className="col-xs-12 col-sm-4 bio">
+        <img src={profile.avatar} alt={'profile avatar'} />
         {visible && (
           <EditForm
             profile={this.props.form}
@@ -47,7 +40,9 @@ class Bio extends Component {
             cancelChanges={this.cancelChanges}
           />
         )}
-        {!visible && <Details profile={this.props.form} />}
+        {!visible && (
+          <Details toggleVisibility={toggleVisibility} profile={form} />
+        )}
       </div>
     );
   }

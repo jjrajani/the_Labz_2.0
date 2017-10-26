@@ -11,7 +11,7 @@ import { Landing, Profile, Login, Nav, Artists, Workspace } from './components';
 export const Routes = ({ auth }) => {
   return (
     <Router history={history}>
-      <div className="main-content-wrapper">
+      <div className="main-content-wrapper container">
         <Nav auth={auth} />
         <div className="main-content">
           <Route exact path="/" component={Landing} />
