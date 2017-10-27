@@ -27,6 +27,15 @@ class ArtistsList extends WithProfile {
       this.setState({ artists: users });
     }
   };
+  componentDidMount = async () => {
+    if (!this.state.profile && this.props.auth.isAuthenticated()) {
+      this.fetchProfile();
+    }
+    if (!this.props.auth.isAuthenticated()) {
+      let users = await fetchUsers();
+      this.setState({ artists: users });
+    }
+  };
   filterUsers = (users, id) => {
     return users.filter(u => {
       return u._id !== id;
