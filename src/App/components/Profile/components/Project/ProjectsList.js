@@ -6,7 +6,7 @@ import ProjectItem from './ProjectItem';
 class ProjectsList extends Component {
   render() {
     return (
-      <div className="col-xs-12 projects list">
+      <div className="col-xs-12 col-sm-9 projects list">
         <div className="sub-content-header">
           <h4>Projects</h4>
         </div>

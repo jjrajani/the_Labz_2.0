@@ -60,7 +60,6 @@
   @media screen and (min-width: 768px) {
     .bio {
       flex-direction: column;
-      max-width: 200px;
       .details,
       form,
       img {
@@ -72,6 +71,7 @@
       .details,
       form {
         padding-left: 0;
+        max-width: 200px;
       }
     }
   }

@@ -30,7 +30,7 @@ class Bio extends Component {
   render() {
     const { profile, visible, toggleVisibility, form } = this.props;
     return (
-      <div className="col-xs-12 col-sm-4 bio">
+      <div className="col-xs-12 col-sm-3 bio">
         <img src={profile.avatar} alt={'profile avatar'} />
         {visible && (
           <EditForm
@@ -47,8 +47,6 @@ class Bio extends Component {
     );
   }
 }
-
-// Nael Alismailuse dropbox as the backend - instead of dropbox, jenna's going to try to make a file picker that displays a folder - upload more than one lyrics - song society - can embed on the timeline like soundcloud - move around - permissions - post prototype comments on the song - Filter comments Realtime Video -  Export CSV Community - Search for users - invite users Look and feel - The labz logo instead of the carousel -  Thelabz.com - point to the site - move to AWS Capture metrics UX Designer
 
 Bio.PropTypes = {
   /* component props */
