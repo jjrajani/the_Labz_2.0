@@ -1,5 +1,5 @@
 // Gloabls
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // API Services
 import { fetchUsers } from '../../../api/users';
@@ -17,13 +17,15 @@ class ArtistsList extends WithProfile {
       profile: {}
     };
   }
-  componentDidMount = async () => {
-    let users = await fetchUsers();
-    if (this.state.profile._id !== this.state.profileId) {
-      this.profileId = this.state.profile._id;
-      users = this.filterUsers(users, this.state.profile._id);
+  componentWillUpdate = async () => {
+    if (this.props.auth.isAuthenticated() && !this.state.profile._id) {
+      let users = await fetchUsers();
+      if (this.state.profile._id) {
+        this.profileId = this.state.profile._id;
+        users = this.filterUsers(users, this.state.profile._id);
+      }
+      this.setState({ artists: users });
     }
-    this.setState({ artists: users });
   };
   filterUsers = (users, id) => {
     return users.filter(u => {
@@ -32,10 +34,10 @@ class ArtistsList extends WithProfile {
   };
   render() {
     // console.log('artists', this.state.artists);
+    console.log('artists', this.state);
     const { artists } = this.state;
     return (
       <div className="col-xs-12 artist-list">
-        <h2>Artists List</h2>
         {artists.map((a, i) => <ArtistItem artist={a} key={i} />)}
       </div>
     );

@@ -1,58 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class BioEditForm extends Component {
-  render() {
-    const { nickname, email, website, description } = this.props.profile;
-    return (
-      <form onSubmit={this.props.handleSubmit.bind(this)}>
-        <fieldset>
-          <label>Nickname</label>
-          <input
-            type="text"
-            name="nickname"
-            value={nickname}
-            onChange={this.props.handleChange.bind(this)}
-          />
-        </fieldset>
-        <fieldset>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={this.props.handleChange.bind(this)}
-          />
-        </fieldset>
-        <fieldset>
-          <label>Website</label>
-          <input
-            type="website"
-            name="website"
-            value={website}
-            onChange={this.props.handleChange.bind(this)}
-          />
-        </fieldset>
-        <fieldset>
-          <label>Description</label>
-          <textarea
-            name="description"
-            value={description}
-            onChange={this.props.handleChange.bind(this)}
-          />
-        </fieldset>
-        <div className="buttons">
-          <button className="btn btn-danger" onClick={this.props.cancelChanges}>
-            Discard
-          </button>
-          <button className="btn btn-primary" type="submit">
-            Save
-          </button>
-        </div>
-      </form>
-    );
-  }
-}
+const fields = [
+  { label: 'Nickname', type: 'text', name: 'nickname' },
+  { label: 'Email', type: 'email', name: 'email' },
+  { label: 'Website', type: 'website', name: 'website' },
+  { label: 'Description', type: 'textarea', name: 'description' }
+];
+
+const BioEditForm = ({
+  profile,
+  handleChange,
+  handleSubmit,
+  cancelChanges
+}) => {
+  return (
+    <form onSubmit={handleSubmit.bind(this)}>
+      {fields.map(f => {
+        return (
+          <fieldset key={f.name}>
+            <label>{f.label}</label>
+            {f.type !== 'textarea' ? (
+              <input
+                type={f.type}
+                name={f.name}
+                value={profile[f.name]}
+                onChange={handleChange.bind(this)}
+              />
+            ) : (
+              <textarea
+                name={f.name}
+                value={profile[f.name]}
+                onChange={handleChange.bind(this)}
+              />
+            )}
+          </fieldset>
+        );
+      })}
+      <div className="buttons">
+        <button className="btn btn-danger" onClick={cancelChanges}>
+          Discard
+        </button>
+        <button className="btn btn-primary" type="submit">
+          Save
+        </button>
+      </div>
+    </form>
+  );
+};
 
 BioEditForm.PropTypes = {
   profile: PropTypes.object.isRequired,
@@ -60,3 +55,5 @@ BioEditForm.PropTypes = {
   handleSubmit: PropTypes.func.isRequired,
   cancelChanges: PropTypes.func.isRequired
 };
+
+export default BioEditForm;

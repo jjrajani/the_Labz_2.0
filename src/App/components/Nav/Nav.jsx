@@ -1,5 +1,5 @@
 // Globals
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // Utils
 import withReactRouterBootstrapNav from '../../hoc/withReactRouterBootstrapNav';
@@ -8,28 +8,24 @@ import { Navbar } from 'react-bootstrap';
 import Brand from './Brand/Brand';
 import { AuthLinks, NoAuthLinks } from './Links';
 
-class Nav extends Component {
-  render() {
-    return (
-      <Navbar
-        fixedTop
-        expanded={this.props.isExpanded}
-        onToggle={this.props.onToggle}
-        onSelect={this.props.onSelect}
-        id="main-nav-bar"
-      >
-        <Navbar.Header>
-          <Brand text={'The Labz'} onSelect={this.props.closeNav} />
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse id="links">
-          <AuthLinks auth={this.props.auth} onSelect={this.props.onSelect} />
-          <NoAuthLinks onSelect={this.props.onSelect} />
-        </Navbar.Collapse>
-      </Navbar>
-    );
-  }
-}
+const Nav = ({ auth, isExpanded, onToggle, onSelect, closeNav }) => (
+  <Navbar
+    fixedTop
+    expanded={isExpanded}
+    onToggle={onToggle}
+    onSelect={onSelect}
+    id="main-nav-bar"
+  >
+    <Navbar.Header>
+      <Brand text={'The Labz'} onSelect={closeNav} />
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse id="links">
+      <AuthLinks auth={auth} onSelect={onSelect} />
+      <NoAuthLinks onSelect={onSelect} />
+    </Navbar.Collapse>
+  </Navbar>
+);
 
 Nav.PropTypes = {
   /* Component Props */

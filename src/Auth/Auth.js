@@ -2,7 +2,7 @@ import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0-variables';
 import history from '../App/history';
 import { createUser, fetchUserByAuthId } from '../api/users';
-import profileStore from '../App/components/Profile/profileStore';
+import profileService from '../App/utils/profile_service';
 // import axios from 'axios';
 
 class Auth {
@@ -47,7 +47,7 @@ class Auth {
         this.authProfile = profile;
         dbUser = await fetchUserByAuthId(profile.sub);
         this.userProfile = dbUser;
-        profileStore.profile = dbUser;
+        profileService.profile = dbUser;
       }
       cb(err, dbUser);
     });
@@ -86,7 +86,7 @@ class Auth {
     localStorage.removeItem('expires_at');
     this.authProfile = null;
     this.userProfile = null;
-    profileStore.profile = null;
+    profileService.profile = {};
     // navigate to home
     history.replace('/');
   }

@@ -1,4 +1,4 @@
-class ProfileStore {
+class ProfileService {
   constructor() {
     this.profile = null;
     this.fetchProfile = this.fetchProfile.bind(this);
@@ -28,5 +28,5 @@ class ProfileStore {
   };
 }
 
-const profileStore = new ProfileStore();
-export default profileStore;
+const profileService = new ProfileService();
+export default profileService;
