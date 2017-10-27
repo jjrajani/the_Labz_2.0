@@ -16,7 +16,11 @@ export const Routes = ({ auth }) => {
         <div className="main-content">
           <Route exact path="/" component={Landing} />
           <Route exact path="/profile" component={requireAuth(Profile, auth)} />
-          <Route exact path="/workspace/:id" component={Workspace} />
+          <Route
+            exact
+            path="/workspace/:id"
+            render={props => <Workspace auth={auth} />}
+          />
           <Route
             exact
             path="/login"

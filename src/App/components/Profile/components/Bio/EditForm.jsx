@@ -1,5 +1,8 @@
+// Globals
 import React from 'react';
 import PropTypes from 'prop-types';
+// Components
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 const fields = [
   { label: 'Nickname', type: 'text', name: 'nickname' },
@@ -18,38 +21,30 @@ const BioEditForm = ({
     <form onSubmit={handleSubmit.bind(this)}>
       {fields.map(f => {
         return (
-          <fieldset key={f.name}>
-            <label>{f.label}</label>
-            {f.type !== 'textarea' ? (
-              <input
-                type={f.type}
-                name={f.name}
-                value={profile[f.name]}
-                onChange={handleChange.bind(this)}
-              />
-            ) : (
-              <textarea
-                name={f.name}
-                value={profile[f.name]}
-                onChange={handleChange.bind(this)}
-              />
-            )}
-          </fieldset>
+          <FormGroup controlId={f.name}>
+            {f.label.length > 0 && <ControlLabel>{f.label}</ControlLabel>}
+            <FormControl
+              {...f}
+              onChange={handleChange}
+              value={profile[f.name]}
+            />
+          </FormGroup>
         );
       })}
       <div className="buttons">
-        <button className="btn btn-danger" onClick={cancelChanges}>
+        <Button className="btn btn-danger" onClick={cancelChanges}>
           Discard
-        </button>
-        <button className="btn btn-primary" type="submit">
+        </Button>
+        <Button className="btn btn-primary" type="submit">
           Save
-        </button>
+        </Button>
       </div>
     </form>
   );
 };
 
 BioEditForm.PropTypes = {
+  /* Component Props */
   profile: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,

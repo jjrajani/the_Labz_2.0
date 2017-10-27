@@ -2,21 +2,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Components
-import Bio from './Bio/Bio';
+import Bio from './components/Bio/Bio';
+import Projects from './components/Projects.jsx';
 // HOC
 import WithProfile from '../../hoc/WithProfile';
+// Services
+import { fetchProjects } from '../../../api/workspace';
 
 class Profile extends WithProfile {
   constructor(props) {
     super(props);
     this.state = {
-      profile: {}
+      profile: {},
+      projects: [],
+      fetched: false
     };
   }
+  componentDidUpdate = async () => {
+    if (
+      this.state.profile._id &&
+      this.state.projects.length === 0 &&
+      this.state.fetched === false
+    ) {
+      let projects = await fetchProjects(this.state.profile._id);
+      this.setState({ projects, fetched: true });
+    }
+  };
   render() {
     return (
       <div id="profile" className="row">
         {this.state.profile && <Bio profile={this.state.profile} />}
+        <Projects projects={this.state.projects} />
       </div>
     );
   }

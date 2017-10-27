@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // Services
-import { updateUser } from '../../../../api/users';
+import { updateUser } from '../../../../../api/users';
 // Utils
-import withVisibilityToggle from '../../../hoc/withVisibilityToggle';
-import withFormControls from '../../../hoc/withFormControls';
+import withVisibilityToggle from '../../../../hoc/withVisibilityToggle';
+import withFormControls from '../../../../hoc/withFormControls';
 
 // Components
 import EditForm from './EditForm';
@@ -57,7 +57,7 @@ Bio.PropTypes = {
   toggleVisibility: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   hideVisibility: PropTypes.func.isRequired,
-  /* withFormEdit props */
+  /* withFormControls props */
   form: PropTypes.object.isRequired,
   setFormValues: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,

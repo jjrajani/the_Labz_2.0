@@ -1,43 +1,60 @@
 // Globals
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // Utils
 import { withRouter } from 'react-router-dom';
+// HOC
+import WithWorkspaceAndProfile from '../../hoc/WithWorkspaceAndProfile';
+// Components
+import WorkspaceTitleInput from './WorkspaceTitleInput';
+import WorkspaceNavUtils from './WorkspaceNavUtils';
+import Visualizer from '../Visualizer/Visualizer';
+import Comments from './components/Comments';
+// Services
+import { saveWorkspace, fetchWorkspace } from '../../../api/workspace';
+// Constructors
+import Project from './ProjectClass';
 
-class Project {
-  constructor(props) {
-    props = props || {};
-    this.title = props.title || 'Untitled';
-    this.comments = props.comments || [];
-    this.promotedAudio = props.promotedAudio || '';
-    this.collaborators = props.collaborators || [];
-  }
-}
-
-class Workspace extends Component {
+class Workspace extends WithWorkspaceAndProfile {
   constructor(props) {
     super(props);
-    this.state = { project: {} };
+    this.state = { project: {}, profile: {} };
   }
-  componentWillMount(props) {
-    const { id } = this.props.match.params;
-    id === 'new' ? this.initNew() : this.initExisting(id);
-  }
-  initExisting(id) {
-    // console.log('get existing workspace with id', id);
-    this.setState({ project: new Project() });
-  }
-  initNew() {
-    this.setState({ project: new Project() });
-  }
+  initExisting = async id => {
+    let existingWorkspace = await fetchWorkspace(id);
+    this.setState({ project: existingWorkspace });
+  };
+  initNew = () => {
+    this.setState({ project: new Project({ userId: this.state.profile._id }) });
+  };
+  saveProject = async values => {
+    let savedProject = await saveWorkspace(this.state.project, values);
+    this.props.history.push(`/workspace/${savedProject._id}`);
+  };
   render() {
-    // console.log(this.state.project);
-    return <div>Workspace</div>;
+    console.log('workspace', this.state);
+    return (
+      <div id="workspace" className="row">
+        <div className="col-xs-12 main-content-header">
+          <WorkspaceTitleInput
+            saveProject={this.saveProject}
+            title={this.state.project.title}
+          />
+          <WorkspaceNavUtils />
+          <Visualizer />
+          <Comments />
+        </div>
+      </div>
+    );
   }
 }
 
 Workspace.PropTypes = {
-  match: PropTypes.object.isRequired
+  /* Compnent Props */
+  auth: PropTypes.object.isRequired,
+  /* withRouter Props */
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default withRouter(Workspace);
