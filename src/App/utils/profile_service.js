@@ -8,7 +8,7 @@ class ProfileService {
       return this.profile;
     }
     return new Promise((res, rej) => {
-      if (auth.isAuthenticated()) {
+      if (auth && auth.isAuthenticated()) {
         const { userProfile, getProfile } = auth;
         if (!userProfile || Object.keys(userProfile).length === 0) {
           getProfile((err, profile) => {

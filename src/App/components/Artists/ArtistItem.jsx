@@ -12,6 +12,10 @@ const ArtistItem = ({ artist, history }) => {
     >
       <img src={artist.avatar} alt={`${artist.nickname}'s avatar`} />
       <h3>{artist.nickname}</h3>
+      <p>{artist.name}</p>
+      <p>{artist.email}</p>
+      <p>{artist.website}</p>
+      <p>{artist.latestProject.title}</p>
       <p>{artist.description}</p>
     </div>
   );

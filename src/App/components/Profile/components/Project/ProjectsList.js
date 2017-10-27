@@ -5,7 +5,6 @@ import ProjectItem from './ProjectItem';
 
 class ProjectsList extends Component {
   render() {
-    console.log(this.props.projects);
     return (
       <div className="col-xs-12 projects list">
         <div className="sub-content-header">

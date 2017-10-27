@@ -7,10 +7,20 @@ class FilterService {
       let filteredValues = values.filter(v => {
         let valid = false;
         filterByKeys.forEach(k => {
-          let lowerKey = v[k].toLowerCase();
           let lowerFilter = filter.toLowerCase();
-          if (lowerKey.indexOf(lowerFilter) !== -1) {
-            valid = true;
+          if (k.indexOf('.') !== -1) {
+            let accsr = k.split('.');
+            let lowerKey = accsr.reduce((a, b) => {
+              return a[b];
+            }, v);
+            if (lowerKey && lowerKey.indexOf(lowerFilter) !== -1) {
+              valid = true;
+            }
+          } else {
+            let lowerKey = v[k].toLowerCase();
+            if (lowerKey.indexOf(lowerFilter) !== -1) {
+              valid = true;
+            }
           }
         });
         return valid;

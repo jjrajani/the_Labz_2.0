@@ -7,7 +7,7 @@ const artistFilterInput = {
 
 const filterByKeys = [
   'email',
-  'latestProject',
+  'latestProject.title',
   'name',
   'nickname',
   'website',

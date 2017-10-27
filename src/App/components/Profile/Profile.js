@@ -21,12 +21,13 @@ class Profile extends WithProfile {
     };
   }
   componentDidUpdate = async () => {
-    if (
-      this.state.profile._id &&
-      this.state.projects.length === 0 &&
-      this.state.fetched === false
-    ) {
-      let projects = await fetchProjects(this.state.profile._id);
+    if (this.state.projects.length === 0 && this.state.fetched === false) {
+      let projects = [];
+      if (this.props.match.params.id) {
+        projects = await fetchProjects(this.props.match.params.id);
+      } else {
+        projects = await fetchProjects(this.state.profile._id);
+      }
       this.setState({ projects, fetched: true });
     }
   };
