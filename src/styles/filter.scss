@@ -1,0 +1,18 @@
+.filter {
+  width: 100%;
+  form {
+    display: flex;
+    align-items: center;
+    .form-group {
+      width: 100%;
+      position: relative;
+    }
+    i {
+      position: absolute;
+      right: 10px;
+      top: 9px;
+      color: #888;
+      cursor: pointer;
+    }
+  }
+}

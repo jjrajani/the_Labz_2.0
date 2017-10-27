@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const ArtistItem = ({ artist }) => {
   return (
-    <div id="artists" className="row col-xs-12 col-sm-3 col-md-4">
+    <div className="row col-xs-12 col-sm-3 col-md-4 artist list-item">
       <img src={artist.avatar} alt={`${artist.nickname}'s avatar`} />
       <h3>{artist.nickname}</h3>
       <p>{artist.description}</p>

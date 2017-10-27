@@ -1,0 +1,30 @@
+#artists {
+  // border: solid green 2px;
+  .main-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .artists.list {
+    // border: solid red 2px;
+    .artist.list-item {
+      // border: solid blue 2px;
+      img {
+        max-width: 100px;
+      }
+    }
+  }
+  @media screen and (max-width: 550px) {
+    .main-content-header {
+      flex-wrap: wrap;
+    }
+  }
+  @media screen and (min-width: 550px) {
+    .filter {
+      max-width: 250px;
+    }
+    .form-group {
+      margin: 0;
+    }
+  }
+}
