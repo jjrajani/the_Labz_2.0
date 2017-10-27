@@ -5,6 +5,12 @@ export const fetchUsers = async () => {
   return res.data;
 };
 
+export const fetchUser = async id => {
+  const res = await axios.get(`/api/user/${id}`);
+
+  return res.data;
+};
+
 export const createUser = async user => {
   const res = await axios.post('/api/users', {
     authId: user.sub,

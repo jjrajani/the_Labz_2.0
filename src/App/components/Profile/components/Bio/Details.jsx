@@ -1,17 +1,22 @@
 // Globals
 import React from 'react';
 import PropTypes from 'prop-types';
+// Utils
+import { withRouter } from 'react-router-dom';
 
-const Details = ({ profile, toggleVisibility }) => {
+const Details = ({ profile, toggleVisibility, match }) => {
+  const isArtist = match.params.id ? true : false;
   return (
     <div className="details">
       <h2>
         {profile.nickname}
-        <i
-          style={{ color: 'red', cursor: 'pointer' }}
-          className="fa fa-pencil"
-          onClick={toggleVisibility}
-        />
+        {!isArtist && (
+          <i
+            style={{ color: 'red', cursor: 'pointer' }}
+            className="fa fa-pencil"
+            onClick={toggleVisibility}
+          />
+        )}
       </h2>
       {profile.email && <a href={`mailto:${profile.email}`}>{profile.email}</a>}
       {!profile.email && <p>Add your email</p>}
@@ -23,7 +28,9 @@ const Details = ({ profile, toggleVisibility }) => {
 };
 
 Details.PropTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  /* withRouter Props */
+  match: PropTypes.object.isRequired
 };
 
-export default Details;
+export default withRouter(Details);

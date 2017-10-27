@@ -8,12 +8,14 @@ import ProjectsList from './components/Project/ProjectsList';
 import WithProfile from '../../hoc/WithProfile';
 // Services
 import { fetchProjects } from '../../../api/workspace';
+import { withRouter } from 'react-router-dom';
 
 class Profile extends WithProfile {
   constructor(props) {
     super(props);
     this.state = {
       profile: {},
+      artist: {},
       projects: [],
       fetched: false
     };
@@ -29,9 +31,12 @@ class Profile extends WithProfile {
     }
   };
   render() {
+    const profile = this.props.match.params.id
+      ? this.state.artist
+      : this.state.profile;
     return (
       <div id="profile" className="row">
-        {this.state.profile && <Bio profile={this.state.profile} />}
+        {this.state.profile && <Bio profile={profile} />}
         <ProjectsList projects={this.state.projects} />
       </div>
     );
@@ -40,7 +45,9 @@ class Profile extends WithProfile {
 
 Profile.PropTypes = {
   /* requireAuth props (from route) */
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  /* withRouter props */
+  match: PropTypes.object.isRequired
 };
 
-export default Profile;
+export default withRouter(Profile);

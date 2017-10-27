@@ -3,7 +3,7 @@ import WithProfile from './WithProfile';
 
 class WithWorkspaceAndProfile extends WithProfile {
   componentDidMount = async () => {
-    if (!this.state.profile._id) {
+    if (!this.state.profile._id && this.props.auth.isAuthenticated()) {
       await this.fetchProfile();
     }
     const { id } = this.props.match.params;
