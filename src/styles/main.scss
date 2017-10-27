@@ -21,6 +21,11 @@ a {
   min-height: calc(100vh - 50px);
   margin-top: 50px;
 }
+
+button:focus,
+button:active {
+  outline: 0 !important;
+}
 @import 'app.scss';
 @import 'nav.scss';
 @import 'loading.scss';
@@ -29,3 +34,4 @@ a {
 @import 'profile_projects_list.scss';
 @import 'artists.scss';
 @import 'filter.scss';
+@import 'workspace.scss';

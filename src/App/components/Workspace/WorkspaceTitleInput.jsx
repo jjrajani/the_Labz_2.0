@@ -39,7 +39,6 @@ class WorkspaceTitleInput extends Component {
     return (
       <form>
         <FormGroup controlId={'workspaceTitle'}>
-          <ControlLabel>Title</ControlLabel>
           <FormControl
             name="title"
             ref="title_input"

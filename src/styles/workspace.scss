@@ -1,0 +1,11 @@
+#workspace {
+  .main-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+}

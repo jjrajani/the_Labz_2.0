@@ -9,7 +9,7 @@ import WithWorkspaceAndProfile from '../../hoc/WithWorkspaceAndProfile';
 import WorkspaceTitleInput from './WorkspaceTitleInput';
 import WorkspaceNavUtils from './WorkspaceNavUtils';
 import Visualizer from '../Visualizer/Visualizer';
-import Comments from './components/Comments';
+import Details from './components/Details';
 // Services
 import { saveWorkspace, fetchWorkspace } from '../../../api/workspace';
 // Constructors
@@ -41,9 +41,9 @@ class Workspace extends WithWorkspaceAndProfile {
             title={this.state.project.title}
           />
           <WorkspaceNavUtils />
-          <Visualizer />
-          <Comments />
         </div>
+        <Visualizer />
+        <Details />
       </div>
     );
   }
