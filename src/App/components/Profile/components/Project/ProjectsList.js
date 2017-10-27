@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// Components
+import ProjectItem from './ProjectItem';
 
-class Projects extends Component {
+class ProjectsList extends Component {
   render() {
     console.log(this.props.projects);
     return (
@@ -9,13 +11,18 @@ class Projects extends Component {
         <div className="sub-content-header">
           <h4>Projects</h4>
         </div>
+        <div className="row">
+          {this.props.projects.map(p => {
+            return <ProjectItem project={p} key={p._id} />;
+          })}
+        </div>
       </div>
     );
   }
 }
 
-Projects.PropTypes = {
+ProjectsList.PropTypes = {
   projects: PropTypes.array.isRequired
 };
 
-export default Projects;
+export default ProjectsList;

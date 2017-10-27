@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Components
 import Bio from './components/Bio/Bio';
-import Projects from './components/Projects.jsx';
+import ProjectsList from './components/Project/ProjectsList';
 // HOC
 import WithProfile from '../../hoc/WithProfile';
 // Services
@@ -32,7 +32,7 @@ class Profile extends WithProfile {
     return (
       <div id="profile" className="row">
         {this.state.profile && <Bio profile={this.state.profile} />}
-        <Projects projects={this.state.projects} />
+        <ProjectsList projects={this.state.projects} />
       </div>
     );
   }
