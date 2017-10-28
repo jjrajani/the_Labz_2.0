@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Comments from './Comments';
-import Collaborators from './Collaborators';
+import PropTypes from 'prop-types';
+import Comments from './Comments/Comments';
+import CollaboratorList from './CollaboratorList';
 import { Button } from 'react-bootstrap';
 // Comments
 //  - can filter by: audio, text, segments, commentor, all
@@ -36,11 +37,19 @@ class Details extends Component {
             Collaborators
           </Button>
         </div>
-        {this.state.activeTab === 'comments' && <Comments />}
-        {this.state.activeTab === 'collaborators' && <Collaborators />}
+        {this.state.activeTab === 'comments' && (
+          <Comments profile={this.props.profile} auth={this.props.auth} />
+        )}
+        {this.state.activeTab === 'collaborators' && <CollaboratorList />}
       </div>
     );
   }
 }
+
+Details.PropTypes = {
+  /* Component Props */
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
+};
 
 export default Details;

@@ -21,7 +21,7 @@ const BioEditForm = ({
     <form onSubmit={handleSubmit.bind(this)}>
       {fields.map(f => {
         return (
-          <FormGroup controlId={f.name}>
+          <FormGroup key={f.name} controlId={f.name}>
             {f.label.length > 0 && <ControlLabel>{f.label}</ControlLabel>}
             <FormControl
               {...f}

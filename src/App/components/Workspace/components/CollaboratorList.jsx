@@ -4,14 +4,14 @@ import React, { Component } from 'react';
 // Collaborators
 //  - can filter by: name
 
-class Comments extends Component {
+class CollaboratorList extends Component {
   render() {
     return (
       <div className="col-xs-12">
-        <h3>Comments</h3>
+        <h3>CollaboratorList</h3>
       </div>
     );
   }
 }
 
-export default Comments;
+export default CollaboratorList;

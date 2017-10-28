@@ -13,7 +13,7 @@ import Details from './components/Details';
 // Services
 import { saveWorkspace, fetchWorkspace } from '../../../api/workspace';
 // Constructors
-import Project from './ProjectClass';
+import Project from './projectClass';
 
 class Workspace extends WithWorkspaceAndProfile {
   constructor(props) {
@@ -32,7 +32,6 @@ class Workspace extends WithWorkspaceAndProfile {
     this.props.history.push(`/workspace/${savedProject._id}`);
   };
   render() {
-    console.log('workspace', this.state);
     return (
       <div id="workspace" className="row">
         <div className="col-xs-12 main-content-header">
@@ -43,7 +42,7 @@ class Workspace extends WithWorkspaceAndProfile {
           <WorkspaceNavUtils />
         </div>
         <Visualizer />
-        <Details />
+        <Details profile={this.state.profile} auth={this.props.auth} />
       </div>
     );
   }
