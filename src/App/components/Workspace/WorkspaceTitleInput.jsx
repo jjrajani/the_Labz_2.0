@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // HOC
 import withFormControls from '../../hoc/withFormControls';
 // Components
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, FormControl } from 'react-bootstrap';
 
 class WorkspaceTitleInput extends Component {
   componentWillReceiveProps(nextProps) {

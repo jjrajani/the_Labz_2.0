@@ -7,8 +7,11 @@ import ProjectsList from './components/Project/ProjectsList';
 // HOC
 import WithProfile from '../../hoc/WithProfile';
 // Services
+import filterService from '../../utils/filter_service';
 import { fetchProjects } from '../../../api/workspace';
 import { withRouter } from 'react-router-dom';
+// Libraries
+import { filterByKeys } from './components/Project/projectsFilterMeta';
 
 class Profile extends WithProfile {
   constructor(props) {
@@ -17,6 +20,7 @@ class Profile extends WithProfile {
       profile: {},
       artist: {},
       projects: [],
+      filteredProjects: [],
       fetched: false
     };
   }
@@ -28,8 +32,16 @@ class Profile extends WithProfile {
       } else {
         projects = await fetchProjects(this.state.profile._id);
       }
-      this.setState({ projects, fetched: true });
+      this.setState({ projects, fetched: true, filteredProjects: projects });
     }
+  };
+  filterProjects = filter => {
+    let filteredProjects = filterService.filter(
+      this.state.projects,
+      filter,
+      filterByKeys
+    );
+    this.setState({ filteredProjects });
   };
   render() {
     const profile = this.props.match.params.id
@@ -38,7 +50,10 @@ class Profile extends WithProfile {
     return (
       <div id="profile" className="row">
         {this.state.profile && <Bio profile={profile} />}
-        <ProjectsList projects={this.state.projects} />
+        <ProjectsList
+          filterProjects={this.filterProjects}
+          projects={this.state.filteredProjects}
+        />
       </div>
     );
   }
